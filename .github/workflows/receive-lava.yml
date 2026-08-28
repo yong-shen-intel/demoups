@@ -40,7 +40,11 @@ jobs:
         run: |
           echo "Validating..."
 
-          VALUE=$(cat validation.txt)
+          cat validation.json
+
+          VALUE=$(jq -r '.xship' validation.json)
+
+          echo "VALUE=[$VALUE]"
 
           if [ -z "$VALUE" ]; then
             echo "Validation Failed"
