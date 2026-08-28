@@ -28,9 +28,13 @@ jobs:
           echo "Received XSHIP:"
           echo "${{ github.event.client_payload.xship }}"
 
-      - name: Modify Input File
+      - name: Modify validation.json
         run: |
-          echo "${{ github.event.client_payload.xship }}" > validation.txt
+          cat > validation.json <<EOF
+          {
+            "xship": "${{ github.event.client_payload.xship }}"
+          }
+          EOF
 
       - name: Run Validation
         run: |
