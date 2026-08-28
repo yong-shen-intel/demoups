@@ -58,7 +58,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          git add validation.txt
+          git add .
           git commit -m "UPS validation for ${{ github.event.client_payload.xship }}"
 
       - name: Push Branch
