@@ -26,7 +26,7 @@ jobs:
           import re
           import os
 
-          notebook = Path("PT_VMIN_UPSVF_update.dib")
+          notebook = Path("NVL_U8C_26WW25P4_A0PO_Integ5_UpdateLineItems.dib")
 
           text = notebook.read_text(encoding="utf-8")
 
