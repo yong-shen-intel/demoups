@@ -17,31 +17,27 @@ jobs:
           git checkout -b $BRANCH
           echo "BRANCH=$BRANCH" >> $GITHUB_ENV
 
-      - name: Update dib notebook
+      - name: Update DIB Path
         env:
           BM_PATH: ${{ github.event.client_payload.path }}
         run: |
           python << 'EOF'
           from pathlib import Path
-          import re
           import os
-
-          notebook = Path("NVL_U8C_26WW25P4_A0PO_Integ5_UpdateLineItems.dib")
-
+          import re
+      
+          notebook = Path("PT_VMIN_UPSVF_update.dib")
+      
           text = notebook.read_text(encoding="utf-8")
-
-          new_path = os.environ["BM_PATH"] + r"\flexboms\Release V1.0.0"
-
-          replacement = (
-              f'ups.SetAllFromFlexBomLavaRelease(@"{new_path}")'
-          )
-
+      
+          full_path = os.environ["BM_PATH"] + r"\flexboms\Release V1.0.0"
+      
           text = re.sub(
               r'ups\.SetAllFromFlexBomLavaRelease\(@".*?"\)',
-              replacement,
+              f'ups.SetAllFromFlexBomLavaRelease(@"{full_path}")',
               text
           )
-
+      
           notebook.write_text(text, encoding="utf-8")
           EOF
 
